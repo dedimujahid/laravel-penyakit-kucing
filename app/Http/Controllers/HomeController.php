@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gejala;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+          // Retrieve data from the gejala_kucing table
+        $gejala_kucing = Gejala::all();
+
+        // Pass the data to the view using the compact function
+        return view('home', compact('gejala_kucing'));
     }
 }

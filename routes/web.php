@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KonsultasiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeteksiController;
 use App\Http\Controllers\AdminController;
@@ -17,6 +18,17 @@ Route::middleware(['auth', 'role:user'])->group(function () {
       // Rute untuk manajemen data artikel
     Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');
     Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show-user');
+
+    
+    // Route untuk menampilkan form konsultasi
+    Route::get('/konsultasi', [KonsultasiController::class, 'showForm'])->name('konsultasi.form');
+
+    // Route untuk memproses konsultasi
+    Route::post('/konsultasi/proses', [KonsultasiController::class, 'prosesKonsultasi'])->name('konsultasi.proses');
+
+    // Route untuk menampilkan hasil konsultasi
+    Route::get('/konsultasi/hasil/{id}', [KonsultasiController::class, 'showHasilKonsultasi'])->name('konsultasi.hasil');
+
     // Tambahkan rute lain yang diizinkan untuk user di sini
 });
 

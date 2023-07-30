@@ -15,8 +15,6 @@ class CreateDiagnosesTable extends Migration
             $table->integer('age');
             $table->text('gejala_ids');
             $table->text('hasil_deteksi');
-            // $table->string('nama_penyakit'); // Kolom untuk menyimpan nama penyakit
-            // $table->text('penanganan'); // Kolom untuk menyimpan penanganan penyakit
             $table->timestamps();
         });
     }
