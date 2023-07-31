@@ -1,4 +1,5 @@
-<?php
+
+tidak digunakan sementara karena sudah ada fitur konsultasi
 
 namespace App\Http\Controllers;
 

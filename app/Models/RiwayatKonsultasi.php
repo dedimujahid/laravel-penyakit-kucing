@@ -16,4 +16,9 @@ class RiwayatKonsultasi extends Model
         'nama_penyakit',
         'penanganan',
     ];
+    public function gejala()
+{
+    return $this->hasMany(Gejala::class, 'id', 'gejala_id');
+}
+
 }

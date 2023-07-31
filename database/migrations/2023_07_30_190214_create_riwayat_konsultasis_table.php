@@ -17,6 +17,8 @@ return new class extends Migration
             $table->integer('age');
             $table->string('gejala_ids');
             $table->text('hasil_deteksi');
+            $table->string('nama_penyakit')->nullable(); // Tambahkan kolom 'nama_penyakit' dengan nullable
+            $table->text('penanganan')->nullable(); 
             $table->timestamps();
         });
     }

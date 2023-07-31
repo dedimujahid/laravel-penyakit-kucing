@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeteksiController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\PrintPDFController;
 
 // Rute untuk user
 Route::middleware(['auth', 'role:user'])->group(function () {
@@ -19,20 +20,21 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');
     Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show-user');
 
-    
-    // Route untuk menampilkan form konsultasi
     Route::get('/konsultasi', [KonsultasiController::class, 'showForm'])->name('konsultasi.form');
-
-    // Route untuk memproses konsultasi
-    Route::post('/konsultasi/proses', [KonsultasiController::class, 'prosesKonsultasi'])->name('konsultasi.proses');
-
-    // Route untuk menampilkan hasil konsultasi
+    Route::post('/konsultasi', [KonsultasiController::class, 'prosesKonsultasi'])->name('konsultasi.proses');
     Route::get('/konsultasi/hasil/{id}', [KonsultasiController::class, 'showHasilKonsultasi'])->name('konsultasi.hasil');
+
+    Route::get('/riwayat_konsultasi', [KonsultasiController::class, 'showRiwayatKonsultasi'])->name('riwayat_konsultasi');
+
+      //PrintPDF
+    Route::get('/print_pdf/{id}', [PrintPDFController::class, 'printPDF'])->name('print_pdf');
+    Route::get('/print_all_pdf', [PrintPDFController::class, 'printAllPDF'])->name('print_all_pdf');
+    
 
     // Tambahkan rute lain yang diizinkan untuk user di sini
 });
 
-// Rute untuk admin
+  // Rute untuk admin
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     // Rute untuk dashboard admin
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');

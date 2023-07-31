@@ -15,22 +15,24 @@ class KonsultasiController extends Controller
         $gejala_kucing = Gejala::all();
         return view('konsultasi', compact('gejala_kucing'));
     }
-
-    public function prosesKonsultasi(Request $request)
+        public function prosesKonsultasi(Request $request)
     {
         // Validasi data yang diterima dari form
         $request->validate([
             'cat_name'   => 'required|string|max:255',
             'age'        => 'required|integer',
             'gejala_ids' => 'required|array',
-            'nama_penyakit', 'penanganan',
         ]);
 
-          // Ambil data gejala berdasarkan gejala_ids yang dipilih
-        $selectedGejala = Gejala::whereIn('id', $request->gejala_ids, )->get();
+        // Ambil data gejala berdasarkan gejala_ids yang dipilih
+        $selectedGejala = Gejala::whereIn('id', $request->gejala_ids)->get();
 
         // Lakukan proses deteksi penyakit berdasarkan gejala yang dipilih
         $hasilDeteksi = $this->prosesDeteksi($selectedGejala);
+
+        // Ambil nama penyakit dan penanganan dari gejala yang dipilih
+        $namaPenyakit = $selectedGejala->pluck('nama_penyakit')->implode(', ');
+        $penanganan = $selectedGejala->pluck('penanganan')->implode(', ');
 
         // Simpan hasil konsultasi ke dalam database
         $riwayatKonsultasi = RiwayatKonsultasi::create([
@@ -38,30 +40,41 @@ class KonsultasiController extends Controller
             'age'           => $request->age,
             'gejala_ids'    => implode(',', $request->gejala_ids),
             'hasil_deteksi' => $hasilDeteksi,
+            'nama_penyakit' => $namaPenyakit,
+            'penanganan'    => $penanganan,
         ]);
-        // Ubah gejala_ids menjadi array dari ID
-        $gejalaIdsArray = $request->gejala_ids;
-
-        // Ambil data gejala berdasarkan gejala_ids yang dipilih
-        $pilihangejala = Gejala::whereIn('id', $gejalaIdsArray)->get();
 
         // Tampilkan halaman hasil konsultasi
         return view('hasil_konsultasi', [
-          'hasilDeteksi'  => $hasilDeteksi,
-          'pilihangejala' => $pilihangejala,
-          'cat_name'      => $request->cat_name,
-          'age'           => $request->age,
+            'hasilDeteksi'  => $hasilDeteksi,
+            'pilihangejala' => $selectedGejala,
+            'cat_name'      => $request->cat_name,
+            'age'           => $request->age,
         ]);
     }
-    public function showHasilKonsultasi($id)
+        public function showRiwayatKonsultasi()
     {
-        $konsultasi = RiwayatKonsultasi::findOrFail($id);
-        $gejalaIds = explode(',', $konsultasi->gejala_ids);
-        $gejala = Gejala::whereIn('id', $gejalaIds)->get();
+        $riwayatKonsultasi = RiwayatKonsultasi::all();
+
+        return view('riwayat_konsultasi', [
+            'riwayatKonsultasi' => $riwayatKonsultasi,
+        ]);
+    }
+
+    public function showHasilKonsultasi(Request $request, $id)
+    {
+        $riwayatKonsultasi = RiwayatKonsultasi::findOrFail($id);
+        $gejalaIds         = explode(',', $riwayatKonsultasi->gejala_ids);
+        
+
+        $riwayatKonsultasiIdsArray = $request->gejala_ids;
+        $gejalaTerpilih = Gejala::whereIn('id', $riwayatKonsultasiIdsArray)->get();
+        // $gejalaTerpilih = Gejala::find($riwayatkonsultasi->gejala_id);
 
         return view('hasil_konsultasi', [
-            'konsultasi' => $konsultasi, // Tambahkan variabel $konsultasi agar bisa diakses di view
-            'gejala' => $gejala,
+            'konsultasi'     => $riwayatKonsultasi,       // Tambahkan variabel $konsultasi agar bisa diakses di view
+            'gejalaTerpilih' => $gejalaTerpilih,
+
         ]);
     }
 
@@ -80,3 +93,42 @@ class KonsultasiController extends Controller
         return $hasilDeteksi;
     }
 }
+
+
+
+    // public function prosesKonsultasi(Request $request)
+    // {
+    //     // Validasi data yang diterima dari form
+    //     $request->validate([
+    //         'cat_name'   => 'required|string|max:255',
+    //         'age'        => 'required|integer',
+    //         'gejala_ids' => 'required|array',
+    //     ]);
+
+    //       // Ambil data gejala berdasarkan gejala_ids yang dipilih
+    //     $selectedGejala = Gejala::whereIn('id', $request->gejala_ids, )->get();
+
+    //     // Lakukan proses deteksi penyakit berdasarkan gejala yang dipilih
+    //     $hasilDeteksi = $this->prosesDeteksi($selectedGejala);
+
+    //     // Simpan hasil konsultasi ke dalam database
+    //     $riwayatKonsultasi = RiwayatKonsultasi::create([
+    //         'cat_name'      => $request->cat_name,
+    //         'age'           => $request->age,
+    //         'gejala_ids'    => implode(',', $request->gejala_ids),
+    //         'hasil_deteksi' => $hasilDeteksi,
+    //     ]);
+    //     // Ubah gejala_ids menjadi array dari ID
+    //     $gejalaIdsArray = $request->gejala_ids;
+
+    //     // Ambil data gejala berdasarkan gejala_ids yang dipilih
+    //     $pilihangejala = Gejala::whereIn('id', $gejalaIdsArray)->get();
+
+    //     // Tampilkan halaman hasil konsultasi
+    //     return view('hasil_konsultasi', [
+    //       'hasilDeteksi'  => $hasilDeteksi,
+    //       'pilihangejala' => $pilihangejala,
+    //       'cat_name'      => $request->cat_name,
+    //       'age'           => $request->age,
+    //     ]);
+    // }

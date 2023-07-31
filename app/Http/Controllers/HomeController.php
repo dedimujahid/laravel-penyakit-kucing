@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gejala;
+use App\Models\RiwayatKonsultasi;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -27,7 +28,9 @@ class HomeController extends Controller
           // Retrieve data from the gejala_kucing table
         $gejala_kucing = Gejala::all();
 
+        $riwayatKonsultasi = RiwayatKonsultasi::all();
+
         // Pass the data to the view using the compact function
-        return view('home', compact('gejala_kucing'));
+        return view('home', compact('gejala_kucing',));
     }
 }

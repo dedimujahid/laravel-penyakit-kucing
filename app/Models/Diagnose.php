@@ -1,4 +1,3 @@
-<?php
 
 namespace App\Models;
 
@@ -21,3 +20,5 @@ class Diagnose extends Model
         return $this->belongsToMany(Gejala::class, 'gejala_kucing', 'id', 'gejala_ids');
     }
 }
+
+tidak digunakan sementara karena sudah ada fitur konsultasi
