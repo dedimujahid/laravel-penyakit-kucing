@@ -76,6 +76,15 @@
                 <a href = "{{ route('riwayat_konsultasi') }}" class = "btn btn-primary">Riwayat Konsultasi</a>
             </div>
         </div>
+
+        <div class = "row-mt-2">
+        <div class = "card">
+        <div class = "card-header">{{ __('Wawasan Artikel') }}</div>
+        <div class = "card-body">
+                <p>Untuk Melihat Seluruh Artikel, klik tombol di bawah ini: </p>
+                <a href = "{{ route('artikel.index-user') }}" class = "btn btn-primary">Baca Artikel</a>
+            </div>
+        </div>
     
 
 

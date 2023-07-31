@@ -71,16 +71,21 @@ class ArtikelController extends Controller
     
     public function search(Request $request)
     {
-            // Ambil keyword pencarian dari query parameter 'keyword'
+        // Validasi input keyword
+        $request->validate([
+            'keyword' => 'required|string|max:255',
+        ]);
+    
+        // Ambil keyword pencarian dari query parameter 'keyword'
         $keyword = $request->query('keyword');
-
+    
         // Lakukan query ke database untuk mencari artikel berdasarkan judul yang mengandung keyword
         $artikels = Artikel::where('judul', 'like', '%' . $keyword . '%')->get();
-
+    
         // Tampilkan view hasil pencarian dan lewatkan data artikel yang ditemukan
         return view('artikel.search', compact('artikels', 'keyword'));
-    }
-    
+    }    
+   
     public function store(Request $request)
     {
           // Validasi data yang dikirim dari form

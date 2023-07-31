@@ -37,10 +37,14 @@
                     <ul class = "navbar-nav ms-auto">
                         
                         <!-- Form Pencarian -->
-                        <form class="d-flex" action="{{ route('artikel.search') }}" method="get">
-                            <input class="form-control me-2" type="search" placeholder="Cari artikel..." aria-label="Search" name="keyword" value="{{ request('keyword') }}">
-                            <button class="btn btn-outline-success" type="submit">Cari</button>
+                        <form class="d-flex" action = "{{ route('artikel.search') }}" method = "GET">
+                        
+                        <!-- Input field untuk keyword pencarian -->
+                        <input class="form-control me-2"  type="text" name="keyword" placeholder="Masukkan keyword pencarian"  value="{{ request('keyword') }}">
+                        <!-- Tombol submit -->
+                        <button class="btn btn-outline-success" type="submit">Cari</button>
                         </form>
+
                         <!-- ... -->
                         <!-- Authentication Links -->
                         @guest

@@ -11,13 +11,13 @@ use App\Http\Controllers\PrintPDFController;
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     // Rute untuk mengakses form deteksi
-    Route::get('/deteksi', [DeteksiController::class, 'showForm'])->name('deteksi.form');
-    Route::post('/deteksi', [DeteksiController::class, 'deteksi'])->name('deteksi.deteksi');
+    // Route::get('/deteksi', [DeteksiController::class, 'showForm'])->name('deteksi.form');
+    // Route::post('/deteksi', [DeteksiController::class, 'deteksi'])->name('deteksi.deteksi');
 
     // Rute untuk pencarian artikel
-    Route::get('/artikel/search', [ArtikelController::class, 'search'])->name('artikel.search');
-      // Rute untuk manajemen data artikel
-    Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');
+    Route::get('/artikel/search', [ArtikelController::class, 'searchArtikel'])->name('artikel.search');
+    // Rute untuk manajemen data artikel
+    Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index-user');
     Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show-user');
 
     Route::get('/konsultasi', [KonsultasiController::class, 'showForm'])->name('konsultasi.form');
@@ -26,10 +26,9 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 
     Route::get('/riwayat_konsultasi', [KonsultasiController::class, 'showRiwayatKonsultasi'])->name('riwayat_konsultasi');
 
-      //PrintPDF
+    //PrintPDF
     Route::get('/print_pdf/{id}', [PrintPDFController::class, 'printPDF'])->name('print_pdf');
     Route::get('/print_all_pdf', [PrintPDFController::class, 'printAllPDF'])->name('print_all_pdf');
-    
 
     // Tambahkan rute lain yang diizinkan untuk user di sini
 });
@@ -40,8 +39,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
     // Rute untuk manajemen data deteksi
-    Route::get('/deteksi', [DeteksiController::class, 'showForm'])->name('deteksi.form');
-    Route::post('/deteksi', [DeteksiController::class, 'deteksi'])->name('deteksi.deteksi');
+    // Route::get('/deteksi', [DeteksiController::class, 'showForm'])->name('deteksi.form');
+    // Route::post('/deteksi', [DeteksiController::class, 'deteksi'])->name('deteksi.deteksi');
 
     // Rute untuk manajemen data artikel
     Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');
