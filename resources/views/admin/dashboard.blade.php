@@ -82,7 +82,7 @@
         <div class = "card-header">{{ __('Wawasan Artikel') }}</div>
         <div class = "card-body">
                 <p>Untuk Melihat Seluruh Artikel, klik tombol di bawah ini: </p>
-                <a href = "{{ route('artikel.index') }}" class = "btn btn-primary">Baca Artikel</a>
+                <a href = "{{ route('artikel.index-admin') }}" class = "btn btn-primary">Baca Artikel</a>
             </div>
         </div>
     
