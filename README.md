@@ -64,3 +64,38 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Catatan
+untuk migrasi data penyakit di seed: 
+php   artisan db                   : seed
+
+untuk membersihkan:
+php artisan cache:clear
+php artisan view:clear
+php artisan route:clear
+
+untuk kembali ke migrate sebelumnya: 
+php   artisan migrate              : rollback
+
+atau
+ php artisan migrate:rollback --step=1  
+
+untuk migrasi database:
+php artisan migrate
+
+semacam refresh: 
+composer dump-autoload
+php artisan migrate: refresh
+
+membuat model dan migrasi datanya: 
+php     artisan make             : model Artikel -m
+Artikel adalah namanya
+
+membuat data-migrasi baru: 
+php     artisan make     : migration create_artikels_table
+artikels adalah namanya
+
+membuat controller  :
+php     artisan make: controller ArtikelController
+
+php artisan db:seed --class = GejalaSeeder

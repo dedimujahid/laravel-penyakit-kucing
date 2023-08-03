@@ -1,0 +1,11 @@
+@import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+@import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import '../../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+@import '../../node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css';
+@import '../../node_modules/datatables.net-responsive/css/responsive.bootstrap4.min.css';
+@import '../../node_modules/datatables.net-buttons/css/buttons.bootstrap4.min.css';
+@import '../../node_modules/admin-lte/dist/css/adminlte.css';
+@import '../../node_modules/admin-lte/dist/css/adminlte.min.css';
+@import '../../node_modules/overlayscrollbars/styles/overlayscrollbars.css';
+@import '../../node_modules/overlayscrollbars/styles/overlayscrollbars.min.css';
+
