@@ -49,11 +49,11 @@ class ArtikelController extends Controller
     //     // Tampilkan view index.blade.php dan lewatkan data artikel
     //     return view('artikel.index', compact('artikels'));
     // }
-    // public function create()
-    // {
-    //     // Tampilkan view create.blade.php untuk membuat artikel baru
-    //     return view('artikel.create');
-    // }
+    public function create()
+    {
+        // Tampilkan view create.blade.php untuk membuat artikel baru
+        return view('artikel.create');
+    }
 
     // public function show($id)
     // {
@@ -68,7 +68,19 @@ class ArtikelController extends Controller
     // // Tampilkan view show.blade.php dan lewatkan data artikel
     // return view('artikel.show', compact('artikel'));
     // }
-    
+    public function edit($id)
+    {
+        // Find the article based on the ID
+        $artikel = Artikel::find($id);
+
+        // Check if the article exists
+        if (!$artikel) {
+            return redirect()->route('artikel.index-admin')->with('error', 'Artikel tidak ditemukan.');
+        }
+
+        // Display the edit view for the admin role
+        return view('artikel.edit', compact('artikel'));
+    }
     public function search(Request $request)
     {
         // Validasi input keyword
@@ -107,25 +119,52 @@ class ArtikelController extends Controller
         ]);
 
         // Redirect pengguna ke halaman daftar artikel setelah berhasil menyimpan artikel
-        return redirect()->route('artikel.index')->with('success', 'Artikel berhasil disimpan.');
-
-        // Fungsi-fungsi lain...
+        return redirect()->route('artikel.index-admin')->with('success', 'Artikel berhasil disimpan.');
     }
 
-    public function update(Request $request, $id)
+        public function update(Request $request, $id)
     {
+        // Find the article based on the ID
         $artikel = Artikel::find($id);
-        // Fungsi-fungsi lain...
 
-        if ($request->hasFile('gambar')) {
-            Storage::delete('public/gambar_artikel/' . basename($artikel->gambar));
-            $path = $request->file('gambar')->store('public/gambar_artikel');
-            $artikel->gambar = Storage::url($path);
-            $artikel->save();
+        // Check if the article exists
+        if (!$artikel) {
+            return redirect()->route('artikel.index-admin')->with('error', 'Artikel tidak ditemukan.');
         }
 
-        // Fungsi-fungsi lain...
+        // Validate the submitted form data
+        $request->validate([
+            'judul'   => 'required',
+            'penulis' => 'required',
+            'konten' => 'required',
+            'tanggal_publikasi' => 'required|date',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Update this to allow nullable and specific image formats
+        ]);
+
+        // Handle the article image if provided in the form
+        if ($request->hasFile('gambar')) {
+            // Delete the old image from storage if it exists
+            if ($artikel->gambar) {
+                Storage::delete('public/gambar_artikel/' . basename($artikel->gambar));
+            }
+
+            // Store the new image and get the path
+            $path = $request->file('gambar')->store('public/gambar_artikel');
+            $artikel->gambar = Storage::url($path);
+        }
+
+        // Update the article data
+        $artikel->judul = $request->judul;
+        $artikel->penulis = $request->penulis;
+        $artikel->konten = $request->konten;
+        $artikel->tanggal_publikasi = $request->tanggal_publikasi;
+
+        // Save the updated article
+        $artikel->save();
+
+        return redirect()->route('artikel.index-admin')->with('success', 'Artikel berhasil diperbarui.');
     }
+
     public function destroy($id)
     {
         // Temukan artikel berdasarkan ID

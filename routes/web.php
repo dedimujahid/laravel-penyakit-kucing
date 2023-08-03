@@ -43,7 +43,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     // Route::post('/deteksi', [DeteksiController::class, 'deteksi'])->name('deteksi.deteksi');
 
     // Rute untuk manajemen data artikel
-    Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');
+    Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index-admin');
     Route::get('/artikel/create', [ArtikelController::class, 'create'])->name('artikel.create');
     Route::post('/artikel', [ArtikelController::class, 'store'])->name('artikel.store');
     Route::get('/artikel/{id}/edit', [ArtikelController::class, 'edit'])->name('artikel.edit');
