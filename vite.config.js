@@ -1,28 +1,24 @@
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
-import vue from '@vitejs/plugin-vue';
+import { defineConfig } from "vite";
+import laravel from "laravel-vite-plugin";
 
 export default defineConfig({
     plugins: [
+        // add css and js file
         laravel({
-            input: [
-                'resources/sass/app.scss',
-                'resources/js/app.js',
-            ],
+            input: ["resources/css/app.css", "resources/js/app.js"],
             refresh: true,
         }),
-        vue({
-            template: {
-                transformAssetUrls: {
-                    base: null,
-                    includeAbsolute: false,
-                },
+        // auto refresh blade files
+        {
+            name: "blade",
+            handleHotUpdate({ file, server }) {
+                if (file.endsWith(".blade.php")) {
+                    server.ws.send({
+                        type: "full-reload",
+                        path: "*",
+                    });
+                }
             },
-        }),
-    ],
-    resolve: {
-        alias: {
-            vue: 'vue/dist/vue.esm-bundler.js',
         },
-    },
+    ],
 });

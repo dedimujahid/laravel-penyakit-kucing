@@ -43,7 +43,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     // Route::post('/deteksi', [DeteksiController::class, 'deteksi'])->name('deteksi.deteksi');
 
     // Rute untuk manajemen data artikel
-    Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');
+    Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index-admin');
     Route::get('/artikel/create', [ArtikelController::class, 'create'])->name('artikel.create');
     Route::post('/artikel', [ArtikelController::class, 'store'])->name('artikel.store');
     Route::get('/artikel/{id}/edit', [ArtikelController::class, 'edit'])->name('artikel.edit');
@@ -51,8 +51,18 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::delete('/artikel/{id}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
     Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
 
-    // Rute untuk pencarian artikel
-    Route::get('/artikel/search', [ArtikelController::class, 'search'])->name('artikel.search');
+        // Rute untuk pencarian artikel
+        Route::get('/artikel/search', [ArtikelController::class, 'searchArtikel'])->name('artikel.search');
+    
+        Route::get('/konsultasi', [KonsultasiController::class, 'showForm'])->name('konsultasi.form');
+        Route::post('/konsultasi', [KonsultasiController::class, 'prosesKonsultasi'])->name('konsultasi.proses');
+        Route::get('/konsultasi/hasil/{id}', [KonsultasiController::class, 'showHasilKonsultasi'])->name('konsultasi.hasil');
+    
+        Route::get('/riwayat_konsultasi', [KonsultasiController::class, 'showRiwayatKonsultasi'])->name('riwayat_konsultasi');
+    
+        //PrintPDF
+        Route::get('/print_pdf/{id}', [PrintPDFController::class, 'printPDF'])->name('print_pdf');
+        Route::get('/print_all_pdf', [PrintPDFController::class, 'printAllPDF'])->name('print_all_pdf');
 
     // Tambahkan rute lain yang diperlukan untuk admin di sini
 });

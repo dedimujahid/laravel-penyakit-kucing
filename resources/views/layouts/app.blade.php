@@ -1,91 +1,96 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang = "{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset = "utf-8">
+    <meta name    = "viewport" content = "width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name = "csrf-token" content = "{{ csrf_token() }}">
 
     <title>{{ ('Deteksi Penyakit Kucing') }}</title>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel = "stylesheet" href = "{{asset('backend/plugins/fontawesome-free/cs/all.min.css') }}">
+  <link rel = "stylesheet" href = "{{asset('backend/plugins/overlayScrollbars/cs/OverlayScrollbars.min.css') }}">
+  <link rel = "stylesheet" href = "{{asset('backend/dist/css/adminlte.min.css')}}"> --}}
+    @vite(['resources/css/app.css'])
+    @vite(['resources/js/app.js'])
 
-    <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ 'Deteksi Penyakit Kucing' }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+<body class = "hold-transition light-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div  class = "wrapper">
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+  <!-- Preloader -->
+  <!-- <div class = "preloader flex-column justify-content-center align-items-center">
+  <img class = "animation__wobble" src = "{{asset('backend/dist/img/AdminLTELogo.png')}}" alt = "AdminLTELogo" height = "60" width = "60">
+  </div> -->
+<!-- Navbar -->
 
-                    </ul>
+ @auth
+            @if (auth()->user()->role === 'Admin')
+                <!-- Navbar and Sidebar for Admin -->
+                @include('layouts.navbar')
+                @include('layouts.sidebar')
+               
+            @else
+                <!-- Navbar and Sidebar for User -->
+                @include('layouts.navbar')
+                @include('layouts.sidebar')
+                
+            @endif
+        @endauth
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class = "navbar-nav ms-auto">
-                        
-                        <!-- Form Pencarian -->
-                        <form class="d-flex" action = "{{ route('artikel.search') }}" method = "GET">
-                        
-                        <!-- Input field untuk keyword pencarian -->
-                        <input class="form-control me-2"  type="text" name="keyword" placeholder="Masukkan keyword pencarian"  value="{{ request('keyword') }}">
-                        <!-- Tombol submit -->
-                        <button class="btn btn-outline-success" type="submit">Cari</button>
-                        </form>
-
-                        <!-- ... -->
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-            </nav>
-
-        <main class="py-4">
+        <div class="content-wrapper">
             @yield('content')
-        </main>
+        </div>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+  <footer           class                    = "main-footer">
+  <strong>Copyright &copy; 2022-2023 <a href = "https://adminlte.io">Bawaslu-Kota-Malang</a>.</strong>
+    All rights reserved.
+    <div class = "float-right d-none d-sm-inline-block">
+      <b>Version</b> 1.0.0
     </div>
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+{{-- <script src="{{asset('backend/plugins/jquery/jquery.min.js')}}"></script>
+<script src = "{{asset('backend/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src = "{{asset('backend/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+<script src = "{{asset('backend/dist/js/adminlte.js')}}"></script>
+<script src = "{{asset('backend/plugins/jquery-mousewheel/jquery.mousewheel.js')}}"></script>
+<script src = "{{asset('backend/plugins/raphael/raphael.min.js')}}"></script>
+<script src = "{{asset('backend/plugins/jquery-mapael/jquery.mapael.min.js')}}"></script>
+<script src = "{{asset('backend/plugins/jquery-mapael/maps/usa_states.min.js')}}"></script>
+<script src = "{{asset('backend/plugins/chart.js/Chart.min.js')}}"></script>
+<script src = "{{asset('backend/dist/js/demo.js')}}"></script>
+<script src = "{{asset('backend/dist/js/pages/dashboard2.js')}}"></script> --}}
+<script>
+    $(function () {
+      $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons"   : ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      $('#example2').DataTable({
+        "paging"      : true,
+        "lengthChange": false,
+        "searching"   : false,
+        "ordering"    : true,
+        "info"        : true,
+        "autoWidth"   : false,
+        "responsive"  : true,
+      });
+    });
+  </script>
+  <script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
 </body>
 </html>

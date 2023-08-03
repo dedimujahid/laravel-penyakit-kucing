@@ -1,39 +1,19 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-import './bootstrap';
-import { createApp } from 'vue';
-
-/**
- * Next, we will create a fresh Vue application instance. You may then begin
- * registering components with the application instance so they are ready
- * to use in your application's views. An example is included for you.
- */
-
-const app = createApp({});
-
-import ExampleComponent from './components/ExampleComponent.vue';
-app.component('example-component', ExampleComponent);
-
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-// Object.entries(import.meta.glob('./**/*.vue', { eager: true })).forEach(([path, definition]) => {
-//     app.component(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
-// });
-
-/**
- * Finally, we will attach the application instance to a HTML element with
- * an "id" attribute of "app". This element is included with the "auth"
- * scaffolding. Otherwise, you will need to add an element yourself.
- */
-
-app.mount('#app');
+import "admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js";
+import "admin-lte/plugins/jquery/jquery.min.js";
+import "admin-lte/plugins/datatables/jquery.dataTables.min.js";
+import "admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js";
+import "admin-lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js";
+import "admin-lte/plugins/datatables-responsive/js/dataTables.responsive.min.js";
+import "admin-lte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js";
+import "admin-lte/plugins/datatables-buttons/js/dataTables.buttons.min.js";
+import "admin-lte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js";
+import "admin-lte/plugins/jszip/jszip.min.js";
+import "admin-lte/plugins/pdfmake/pdfmake.min.js";
+import "admin-lte/plugins/pdfmake/vfs_fonts.js";
+import "admin-lte/plugins/datatables-buttons/js/buttons.html5.min.js";
+import "admin-lte/plugins/datatables-buttons/js/buttons.print.min.js";
+import "admin-lte/plugins/datatables-buttons/js/buttons.colVis.min.js";
+import "admin-lte/dist/js/adminlte.min.js";
+import "admin-lte/dist/js/demo.js";
+import "admin-lte/dist/js/pages/dashboard.js";
+import "admin-lte/plugins/jquery-ui/jquery-ui.min.js";

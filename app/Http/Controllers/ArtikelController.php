@@ -49,11 +49,11 @@ class ArtikelController extends Controller
     //     // Tampilkan view index.blade.php dan lewatkan data artikel
     //     return view('artikel.index', compact('artikels'));
     // }
-    // public function create()
-    // {
-    //     // Tampilkan view create.blade.php untuk membuat artikel baru
-    //     return view('artikel.create');
-    // }
+    public function create()
+    {
+        // Tampilkan view create.blade.php untuk membuat artikel baru
+        return view('artikel.create');
+    }
 
     // public function show($id)
     // {
@@ -110,6 +110,18 @@ class ArtikelController extends Controller
         return redirect()->route('artikel.index')->with('success', 'Artikel berhasil disimpan.');
 
         // Fungsi-fungsi lain...
+    }
+    public function edit($id)
+    {
+        $artikel = Artikel::findOrFail($id); // Temukan artikel berdasarkan ID yang diberikan
+
+        // Periksa apakah artikel ditemukan
+        if (!$artikel) {
+            abort(404);
+        }
+
+        // Tampilkan view form edit artikel dan lewatkan data artikel yang ditemukan
+        return view('artikel.edit', compact('artikel'));
     }
 
     public function update(Request $request, $id)
