@@ -15,7 +15,7 @@
                     @endif
 
                     <p>{{ __('Welcome, :user!', ['user' => Auth::user()->name]) }}</p>
-                    <p>{{ __('You are logged in as a user!') }}</p>
+                    <p>{{ __('You are logged in as a Admin!') }}</p>
 
                     <!-- Add more personalized user information, actions, or content here -->
                 </div>

@@ -26,7 +26,7 @@
   </div> -->
 <!-- Navbar -->
 
- @auth
+        @auth
             @if (auth()->user()->role === 'Admin')
                 <!-- Navbar and Sidebar for Admin -->
                 @include('layouts.navbar')
@@ -52,7 +52,7 @@
 
   <!-- Main Footer -->
   <footer           class                    = "main-footer">
-  <strong>Copyright &copy; 2022-2023 <a href = "https://adminlte.io">Bawaslu-Kota-Malang</a>.</strong>
+  <strong>Copyright &copy; 2022-2023 <a href = "https://kucingbegal.com">KucingBegal.com</a>.</strong>
     All rights reserved.
     <div class = "float-right d-none d-sm-inline-block">
       <b>Version</b> 1.0.0

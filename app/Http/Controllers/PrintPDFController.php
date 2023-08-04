@@ -55,4 +55,5 @@ class PrintPDFController extends Controller
 
         return $pdf->stream('semua_riwayat_konsultasi.pdf');
     }
+    
 }

@@ -20,11 +20,11 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index-user');
     Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show-user');
 
-    Route::get('/konsultasi', [KonsultasiController::class, 'showForm'])->name('konsultasi.form');
-    Route::post('/konsultasi', [KonsultasiController::class, 'prosesKonsultasi'])->name('konsultasi.proses');
-    Route::get('/konsultasi/hasil/{id}', [KonsultasiController::class, 'showHasilKonsultasi'])->name('konsultasi.hasil');
+    Route::get('/konsultasi', [KonsultasiController::class, 'showForm'])->name('konsultasi-user.form');
+    Route::post('/konsultasi', [KonsultasiController::class, 'prosesKonsultasi'])->name('konsultasi-user.proses');
+    Route::get('/konsultasi/hasil/{id}', [KonsultasiController::class, 'showHasilKonsultasi'])->name('konsultasi-user.hasil');
 
-    Route::get('/riwayat_konsultasi', [KonsultasiController::class, 'showRiwayatKonsultasi'])->name('riwayat_konsultasi');
+    Route::get('/riwayat_konsultasi', [KonsultasiController::class, 'showRiwayatKonsultasi'])->name('riwayat_konsultasi-user');
 
     //PrintPDF
     Route::get('/print_pdf/{id}', [PrintPDFController::class, 'printPDF'])->name('print_pdf');

@@ -63,7 +63,7 @@
                 <div class="card-header">{{ __('Konsultasi Penyakit') }}</div>
                 <div class="card-body">
                     <p>Untuk melakukan konsultasi penyakit kucing, klik tombol di bawah ini: </p>
-                    <a href="{{ route('konsultasi.form') }}" class="btn btn-primary">Konsultasi Sekarang</a>
+                    <a href="{{ route('konsultasi-user.form') }}" class="btn btn-primary">Konsultasi Sekarang</a>
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
         <div class = "card-header">{{ __('Riwayat Konsultasi') }}</div>
             <div class = "card-body">
                 <p>Untuk Melihat Seluruh Riwayat Konsultasi penyakit kucing, klik tombol di bawah ini: </p>
-                <a href = "{{ route('riwayat_konsultasi') }}" class = "btn btn-primary">Riwayat Konsultasi</a>
+                <a href = "{{ route('riwayat_konsultasi-user') }}" class = "btn btn-primary">Riwayat Konsultasi</a>
             </div>
         </div>
 

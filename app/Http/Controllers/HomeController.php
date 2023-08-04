@@ -31,6 +31,6 @@ class HomeController extends Controller
         $riwayatKonsultasi = RiwayatKonsultasi::all();
 
         // Pass the data to the view using the compact function
-        return view('home', compact('gejala_kucing',));
+        return view('home', compact('gejala_kucing','riwayatKonsultasi'));
     }
 }

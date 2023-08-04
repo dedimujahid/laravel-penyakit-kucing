@@ -1,9 +1,17 @@
 <aside class="main-sidebar sidebar-light-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ route('home') }}" class="brand-link">
-      <img src="{{ asset('backend/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">FORM A LHP</span>
-    </a>
+    @if (Auth::user()->isAdmin())
+                        <a href = "{{ route('admin.dashboard') }}" class = "brand-link">
+                        <img src="{{ asset('backend/dist/img/logo-kucing.jpeg')}}" alt="logo-kucing.jpeg" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Kucing Begal</span>
+                        </a>
+                    @else
+                        <a href = "{{ url('/home') }}" class = "brand-link">
+                        <img src="{{ asset('backend/dist/img/logo-kucing.jpeg')}}" alt="logo-kucing.jpeg" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Kucing Begal</span>
+                        </a>
+                    @endif
+    
 
     <!-- Sidebar -->
     <div class = "sidebar">
@@ -37,32 +45,32 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-        <li class="nav-item menu-open">
+        <!-- <li class="nav-item menu-open">
             <ul class="nav nav-treeview nav-item">
-                <li class="nav-item"><!-- INI ADALAH MENU 3-->
-                    <a href="{{ route('home') }}" class="nav-link">
+                <li class="nav-item">
+                    <a href="{{ route('riwayat_konsultasi') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Dashboard</p>
+                      <p>Riwayat Konsultasi</p>
                     </a>
                   </li>
-              <li class="nav-item"><!-- INI ADALAH MENU 2-->
+              <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Laporan FORM A</p>
+                  <p>Konsultasi Penyakit</p>
                 </a>
               </li>
 
-              <li class="nav-item"><!-- INI ADALAH MENU 3-->
-                <a href="#" class="nav-link">
+              <li class="nav-item">
+                <a href= "{{ route('artikel.index-user') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>User Pengguna</p>
+                  <p>Artikel</p>
                 </a>
               </li>
             </ul>
-        </li>
+        </li> -->
 
 
-          {{-- <li class="nav-item">
+         <!-- <li class="nav-item">
             <a href  = "#" class = "nav-link">
             <i class = "nav-icon fas fa-circle"></i>
               <p>
@@ -119,7 +127,7 @@
                 </a>
               </li>
             </ul>
-          </li> --}}
+          </li> -->
           @auth
           <li class="nav-item">
             <a class="dropdown-item" href="{{ route('logout') }}"
